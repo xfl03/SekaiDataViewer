@@ -1,0 +1,62 @@
+.body {
+    background-color: #282C34;
+    color: #BBBBBB;
+    padding: 2.6rem 1.3rem 2.6rem 3rem;
+    font-size: 2.3rem;
+}
+
+.event {
+    display: flex;
+}
+
+.event_logo {
+    flex-grow: 0;
+    max-width: 50%;
+}
+
+.event_info {
+    margin-left: 5rem;
+    flex-grow: 0;
+}
+
+.event_info_name {
+    color: #FFFFFF;
+    font-size: 3.3rem;
+}
+
+.event_info_bonus {
+    display: flex;
+}
+
+.event_info_plus {
+    font-size: 70px;
+}
+
+.event_info_bonus_attr {
+    min-width: 128px;
+}
+
+.card {
+    margin-top: 1.9rem;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    max-height:600px;
+}
+
+.card_detail {
+    display: flex;
+    padding: 0.6rem 0 0 2rem;
+    width: 50rem;
+}
+
+.card_detail_image {
+    min-width: 156px;
+    min-height: 156px;
+}
+
+.footer {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}

@@ -1,0 +1,64 @@
+.body {
+    background-color: #282C34;
+    color: #BBBBBB;
+    padding: 4rem 1.3rem 4rem 3rem;
+    font-size: 2.3rem;
+}
+
+.music {
+    display: flex;
+}
+
+.music_logo {
+    margin-left: 2rem;
+    flex-grow: 0;
+    max-width: 50%;
+}
+
+.music_info {
+    margin-left: 5rem;
+    flex-grow: 0;
+}
+
+.music_info_name {
+    color: #FFFFFF;
+    font-size: 4.3rem;
+}
+
+.music_info_author {
+    font-size: 2.1rem;
+    white-space: pre-wrap;
+}
+
+.music_info_duration {
+    margin-top: 3rem;
+    font-size: 2.5rem;
+}
+
+.music_info_difficulty {
+    margin-top: 3rem;
+    display: flex;
+}
+
+.music_info_difficulty_info {
+    text-align: center;
+    margin-right: 2rem;
+}
+
+.music_info_vocal {
+    margin-top: 3rem;
+}
+
+.music_info_vocal_info {
+    display: flex;
+}
+
+.music_info_vocal_name {
+    width:10rem;
+}
+
+.footer {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    margin-top: 3.8rem;
+}

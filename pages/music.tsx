@@ -1,0 +1,90 @@
+import {GetStaticProps} from "next";
+import {Difficulty, getMusic, MusicInfo} from "../lib/music";
+import style from '../styles/music.module.css';
+import React from "react";
+
+export const difficulties: Record<string, string> = {
+    "easy": "#86DA45",
+    "normal": "#5FB8E6",
+    "hard": "#F3AE3C",
+    "expert": "#DC5268",
+    "master": "#AC3EE6",
+}
+
+export const vocals: Record<string, string> = {
+    "original_song": "原曲",
+    "sekai": "SEKAI",
+    "another_vocal": "其他"
+}
+
+export const outsideCharacters: Record<number, string> = {
+    1: "GUMI",
+    2: "IA",
+    3: "flower"
+}
+
+function getCharacter(id: number, type: string) {
+    if (type == "game_character") {
+        return (<img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`} style={{width:'70px',height:'70px'}}/>);
+    }
+    return (<div>{outsideCharacters[id]}</div>)
+}
+
+export default function Music({music}: { music: MusicInfo }) {
+    return (
+        <div className={style.body}>
+            <div className={style.music}>
+                <div className={style.music_logo}>
+                    <img alt={"logo"} src={`/assets/music/${music.assetbundleName}.webp`} style={{width:'800px',height:'800px'}}/>
+                </div>
+                <div className={style.music_info}>
+                    <div className={style.music_info_name}>
+                        {music.title}
+                    </div>
+                    <div className={style.music_info_author}>
+                        {`作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
+                    </div>
+                    <div className={style.music_info_duration}>
+                        时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.floor((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）
+                    </div>
+                    <div className={style.music_info_difficulty}>
+                        <div>
+                            <div>难度：</div>
+                            <div>Combo：</div>
+                        </div>
+                        {music.difficulties.map(it => (
+                            <div key={it.musicDifficulty} className={style.music_info_difficulty_info}
+                                 style={{color: difficulties[it.musicDifficulty]}}>
+                                <div>{it.playLevel}</div>
+                                <div>{it.noteCount}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className={style.music_info_vocal}>
+                        {music.vocals.map(it => (
+                            <div key={it.musicVocalType} className={style.music_info_vocal_info}>
+                                <div className={style.music_info_vocal_name}>
+                                    {vocals[it.musicVocalType]}：
+                                </div>
+                                {it.characters.map(it => getCharacter(it.characterId, it.characterType))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <div className={style.footer}>
+                仅供参考，请以游戏内信息为准<br/>
+                BiliBili @xfl03
+            </div>
+        </div>
+    );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    const music = getMusic();
+    return {
+        props: {
+            music
+        }
+    }
+}
