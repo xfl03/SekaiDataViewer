@@ -2,6 +2,7 @@ import {GetStaticProps} from "next";
 import {Difficulty, getMusic, MusicInfo} from "../lib/music";
 import style from '../styles/music.module.css';
 import React from "react";
+import dateFormat from "dateFormat";
 
 export const difficulties: Record<string, string> = {
     "easy": "#86DA45",
@@ -14,7 +15,8 @@ export const difficulties: Record<string, string> = {
 export const vocals: Record<string, string> = {
     "original_song": "原曲",
     "sekai": "SEKAI",
-    "another_vocal": "其他"
+    "another_vocal": "其他",
+    "virtual_singer": "V家",
 }
 
 export const outsideCharacters: Record<number, string> = {
@@ -23,9 +25,15 @@ export const outsideCharacters: Record<number, string> = {
     3: "flower"
 }
 
+function timeStampToString(timestamp: number): string {
+    let date = new Date(timestamp);
+    return dateFormat(date, "yyyy/mm/dd HH:MM");
+}
+
 function getCharacter(id: number, type: string) {
     if (type == "game_character") {
-        return (<img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`} style={{width:'70px',height:'70px'}}/>);
+        return (<img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
+                     style={{width: '70px', height: '70px'}}/>);
     }
     return (<div>{outsideCharacters[id]}</div>)
 }
@@ -35,17 +43,21 @@ export default function Music({music}: { music: MusicInfo }) {
         <div className={style.body}>
             <div className={style.music}>
                 <div className={style.music_logo}>
-                    <img alt={"logo"} src={`/assets/music/${music.assetbundleName}.webp`} style={{width:'800px',height:'800px'}}/>
+                    <img alt={"logo"} src={`/assets/music/${music.assetbundleName}.webp`}
+                         style={{width: '800px', height: '800px'}}/>
                 </div>
                 <div className={style.music_info}>
-                    <div className={style.music_info_name}>
+                    <div className={music.title.length > 10 ? style.music_info_name_small : style.music_info_name}>
                         {music.title}
                     </div>
                     <div className={style.music_info_author}>
-                        {`作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
+                        {(music.lyricist==music.composer&&music.composer==music.arranger)?`作词、作曲、编曲：${music.lyricist}`:`作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
                     </div>
                     <div className={style.music_info_duration}>
                         时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.floor((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）
+                    </div>
+                    <div className={style.music_info_publish}>
+                        解锁时间：{timeStampToString(music.publishedAt)}（北京时间）
                     </div>
                     <div className={style.music_info_difficulty}>
                         <div>
