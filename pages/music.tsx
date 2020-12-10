@@ -54,7 +54,7 @@ export default function Music({music}: { music: MusicInfo }) {
                         {(music.lyricist==music.composer&&music.composer==music.arranger)?`作词、作曲、编曲：${music.lyricist}`:`作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
                     </div>
                     <div className={style.music_info_duration}>
-                        时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.floor((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）
+                        时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.round((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）
                     </div>
                     <div className={style.music_info_publish}>
                         解锁时间：{timeStampToString(music.publishedAt)}（北京时间）
