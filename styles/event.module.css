@@ -29,11 +29,11 @@
 }
 
 .event_info_plus {
-    font-size: 70px;
+    font-size: 50px;
 }
 
 .event_info_bonus_attr {
-    min-width: 128px;
+    min-width: 90px;
 }
 
 .card {
@@ -48,15 +48,29 @@
     display: flex;
     padding: 0.6rem 0 0 2rem;
     width: 50rem;
+    min-height: 183px;
 }
 
 .card_detail_image {
     min-width: 156px;
     min-height: 156px;
+    max-width: 156px;
+    max-height: 156px;
 }
 
 .footer {
     font-size: 1.2rem;
     margin-left: 2rem;
     margin-top: 2rem;
+}
+
+.bonus_image {
+    max-height: 90px;
+    padding-right: 0.3rem;
+}
+
+.cards_display {
+    display: flex;
+    margin-top:50px;
+    padding-bottom: 20px;
 }

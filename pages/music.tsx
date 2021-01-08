@@ -22,7 +22,8 @@ export const vocals: Record<string, string> = {
 export const outsideCharacters: Record<number, string> = {
     1: "GUMI",
     2: "IA",
-    3: "flower"
+    3: "flower",
+    4: "VY2V3"
 }
 
 function timeStampToString(timestamp: number): string {
@@ -45,6 +46,10 @@ export default function Music({music}: { music: MusicInfo }) {
                 <div className={style.music_logo}>
                     <img alt={"logo"} src={`/assets/music/${music.assetbundleName}.webp`}
                          style={{width: '800px', height: '800px'}}/>
+                    <div className={style.footer}>
+                        仅供参考，请以游戏内信息为准<br/>
+                        BiliBili @xfl03
+                    </div>
                 </div>
                 <div className={style.music_info}>
                     <div className={music.title.length > 10 ? style.music_info_name_small : style.music_info_name}>
@@ -83,10 +88,6 @@ export default function Music({music}: { music: MusicInfo }) {
                         ))}
                     </div>
                 </div>
-            </div>
-            <div className={style.footer}>
-                仅供参考，请以游戏内信息为准<br/>
-                BiliBili @xfl03
             </div>
         </div>
     );

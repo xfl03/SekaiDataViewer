@@ -23,6 +23,7 @@ export interface MusicInfo {
     lyricist: string;//作词
     composer: string;//作曲
     arranger: string;//编曲
+    publishedAt: number;
     assetbundleName: string;
     duration: number;
     difficulties: Difficulty[];

@@ -3,6 +3,7 @@ import path from "path";
 
 export interface Card {
     characterId: number;
+    supportUnit: string;//none for default
     rarity: number;
     attr: string;
     skillId: number;
@@ -19,6 +20,7 @@ export interface EventInfo {
     attrBonus: string;
     characterBonus: number[];
     cards: Card[];
+    bonusCards: Card[][];
 }
 
 export function getEvent(): EventInfo {

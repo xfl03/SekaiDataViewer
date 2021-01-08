@@ -36,10 +36,11 @@ function getFile(id: number): string {
     return "404.png"
 }
 
-function getImage(it: Card, normal: boolean) {
-    if (!normal && it.rarity < 3) return (<div className={style.card_detail_image}/>);
+function getImage(it: Card) {
+    console.log(it);
+    let normal = it.rarity < 3;
     return (
-        <div className={style.card_detail_image}>
+        <div key={`${it.assetbundleName}`} className={style.card_detail_image}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156">
                 <image href={`/assets/card/${it.assetbundleName}_${normal ? "normal" : "after_training"}.webp`} x="8"
                        y="8" height="140" width="140"/>
@@ -48,7 +49,7 @@ function getImage(it: Card, normal: boolean) {
                 <image href={`/assets/icon_attribute_${it.attr}.png`} x="0" y="0" height="35"
                        width="35"/>
                 {Array.from(Array(it.rarity).keys()).map(i => (
-                    <image key={i} href={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
+                    <image key={`${it.assetbundleName} ${i}`} href={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
                            x={8 + i * 22}
                            y="125" width="22"
                            height="22"/>
@@ -58,7 +59,7 @@ function getImage(it: Card, normal: boolean) {
     );
 }
 
-export default function Event({event}: { event: EventInfo }) {
+export default function EventBonus({event}: { event: EventInfo }) {
     return (
         <div className={style.body}>
             {/*Event info*/}
@@ -86,23 +87,17 @@ export default function Event({event}: { event: EventInfo }) {
                 </div>
             </div>
 
-            {/*Card info*/}
+            {/*Bonus Card info*/}
             <div className={style.card}>
-                {event.cards.map(it => (
-                    <div key={it.characterId} className={style.card_detail}>
-                        {getImage(it, true)}
-                        {getImage(it, false)}
-                        <div style={{marginLeft: '1.5rem'}}>
-                            <div style={{fontSize: '1.6rem', color: 'white'}}>
-                                {it.prefix}
-                            </div>
-                            <div style={{fontSize: '1.2rem'}}>
-                                {it.gacha ? "卡池招募" : "活动兑换"} {characters[it.characterId]}{it.supportUnit==="none"?"":`（${units[it.supportUnit]}）`}
-                            </div>
-                            <div style={{fontSize: '1.4rem', whiteSpace: 'pre-line'}}>
-                                {chineseSkills[it.skillId]}
-                            </div>
-                        </div>
+                {event.characterBonus.map((it, p) => (
+                    <div key={it} className={style.card_detail}>
+                        <img className={style.bonus_image} key={it} alt={it.toString()} src={`/assets/chara_icons/${getFile(it)}`}/>
+                        <img className={style.bonus_image} alt={event.attrBonus}
+                             src={`/assets/icon_attribute_${event.attrBonus}.png`}/>
+                        {console.log(event.bonusCards[p])}
+                        {event.bonusCards[p].reverse().map(it => {
+                            return (getImage(it))
+                        })}
                     </div>
                 ))}
             </div>
