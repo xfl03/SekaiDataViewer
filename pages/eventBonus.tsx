@@ -49,7 +49,7 @@ function getImage(it: Card) {
                 <image href={`/assets/icon_attribute_${it.attr}.png`} x="0" y="0" height="35"
                        width="35"/>
                 {Array.from(Array(it.rarity).keys()).map(i => (
-                    <image key={`${it.assetbundleName} ${i}`} href={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
+                    <image key={`${it.assetbundleName}-${i}`} id={`${it.assetbundleName}-${i}`} href={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
                            x={8 + i * 22}
                            y="125" width="22"
                            height="22"/>
@@ -94,8 +94,7 @@ export default function EventBonus({event}: { event: EventInfo }) {
                         <img className={style.bonus_image} key={it} alt={it.toString()} src={`/assets/chara_icons/${getFile(it)}`}/>
                         <img className={style.bonus_image} alt={event.attrBonus}
                              src={`/assets/icon_attribute_${event.attrBonus}.png`}/>
-                        {console.log(event.bonusCards[p])}
-                        {event.bonusCards[p].reverse().map(it => {
+                        {event.bonusCards[p].map(it => {
                             return (getImage(it))
                         })}
                     </div>

@@ -19,6 +19,13 @@ export const vocals: Record<string, string> = {
     "virtual_singer": "V家",
 }
 
+export const categories: Record<string, string> = {
+    "mv": "3DMV",
+    "mv_2d": "2DMV",
+    "origin": "原曲MV",
+    "image": "静态图像",
+}
+
 export const outsideCharacters: Record<number, string> = {
     1: "GUMI",
     2: "IA",
@@ -60,6 +67,7 @@ export default function Music({music}: { music: MusicInfo }) {
                     </div>
                     <div className={style.music_info_duration}>
                         时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.round((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）
+                        {categories[music.categories[0]]}
                     </div>
                     <div className={style.music_info_publish}>
                         解锁时间：{timeStampToString(music.publishedAt)}（北京时间）
