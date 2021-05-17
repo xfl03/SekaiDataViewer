@@ -30,7 +30,8 @@ export const outsideCharacters: Record<number, string> = {
     1: "GUMI",
     2: "IA",
     3: "flower",
-    4: "VY2V3"
+    4: "VY2V3",
+    5: "音街ウナ"
 }
 
 function timeStampToString(timestamp: number): string {
@@ -43,7 +44,7 @@ function getCharacter(id: number, type: string) {
         return (<img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
                      style={{width: '70px', height: '70px'}}/>);
     }
-    return (<div>{outsideCharacters[id]}</div>)
+    return (<div>{outsideCharacters[id] === undefined ? `$id缺失信息` : outsideCharacters[id]}</div>)
 }
 
 export default function Music({music}: { music: MusicInfo }) {
@@ -63,7 +64,7 @@ export default function Music({music}: { music: MusicInfo }) {
                         {music.title}
                     </div>
                     <div className={style.music_info_author}>
-                        {(music.lyricist==music.composer&&music.composer==music.arranger)?`作词、作曲、编曲：${music.lyricist}`:`作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
+                        {(music.lyricist == music.composer && music.composer == music.arranger) ? `作词、作曲、编曲：${music.lyricist}` : `作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
                     </div>
                     <div className={style.music_info_duration}>
                         时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.round((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）
