@@ -31,7 +31,8 @@ export const outsideCharacters: Record<number, string> = {
     2: "IA",
     3: "flower",
     4: "VY2V3",
-    5: "音街ウナ"
+    5: "音街ウナ",
+    6: "歌愛ユキ",
 }
 
 function timeStampToString(timestamp: number): string {
@@ -41,10 +42,10 @@ function timeStampToString(timestamp: number): string {
 
 function getCharacter(id: number, type: string) {
     if (type == "game_character") {
-        return (<img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
-                     style={{width: '70px', height: '70px'}}/>);
+        return (<div><img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
+                     style={{width: '70px', height: '70px'}}/></div>);
     }
-    return (<div>{outsideCharacters[id] === undefined ? `$id缺失信息` : outsideCharacters[id]}</div>)
+    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id]}</div>)
 }
 
 export default function Music({music}: { music: MusicInfo }) {
@@ -56,7 +57,7 @@ export default function Music({music}: { music: MusicInfo }) {
                          style={{width: '800px', height: '800px'}}/>
                     <div className={style.footer}>
                         仅供参考，请以游戏内信息为准<br/>
-                        BiliBili @xfl03
+                        bilibili @xfl03
                     </div>
                 </div>
                 <div className={style.music_info}>

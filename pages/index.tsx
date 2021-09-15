@@ -21,7 +21,10 @@ export default function Home() {
                 <a href={"/music"}>Music</a>
             </section>
             <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-                <a href={"/music"}>Music</a>
+                <a href={"/predict"}>Predict</a>
+            </section>
+            <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+                <a href={"/predictScore"}>PredictScore</a>
             </section>
         </Layout>
     )

@@ -119,7 +119,7 @@ export default function Gacha({gacha}: { gacha: GachaInfo }) {
 
             <div className={style.footer}>
                 仅供参考，请以游戏内信息为准<br/>
-                BiliBili @xfl03
+                bilibili @xfl03
             </div>
         </div>
     );
