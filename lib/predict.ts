@@ -24,6 +24,18 @@ export interface PredictModel {
     lastDayPeriod: Record<string, Array<number>>,
 }
 
+export interface TopScore {
+    uid: string,
+    name: string,
+    pts: Array<any>
+}
+
+export interface TopScores {
+    tops: Array<TopScore>,
+    eventStartTime: number,
+    days: number
+}
+
 export function getPredictDebug(): PredictDebug {
     let file = fs.readFileSync(path.join(process.cwd(), 'data/predict-debug.json'), 'utf8');
     return JSON.parse(file) as PredictDebug;
@@ -32,4 +44,9 @@ export function getPredictDebug(): PredictDebug {
 export function getPredictModel(eventType: string): PredictModel {
     let file = fs.readFileSync(path.join(process.cwd(), `data/predict_models_${eventType}.json`), 'utf8');
     return JSON.parse(file) as PredictModel;
+}
+
+export function getTopScores(): TopScores {
+    let file = fs.readFileSync(path.join(process.cwd(), 'data/top-history.json'), 'utf8');
+    return JSON.parse(file) as TopScores;
 }

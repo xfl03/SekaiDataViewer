@@ -37,18 +37,17 @@
 }
 
 .card {
-    margin-top: 1.9rem;
+    margin-bottom: 1.9rem;
     display: flex;
-    flex-flow: column;
+    /*flex-flow: column;*/
     flex-wrap: wrap;
-    max-height:600px;
 }
 
 .card_detail {
     display: flex;
     padding: 0.6rem 0 0 2rem;
     width: 50rem;
-    min-height: 183px;
+    min-height: 166px;
 }
 
 .card_detail_image {

@@ -34,16 +34,20 @@ function genPredict(
     console.log(`${eventDayNow}/${days}`);
 
     for (let day = eventDayNow; day <= days; ++day) {
-        let todayScore = detail.scorePerNormalDay;
+        let todayScore = 0;
         let todayModel = predictModel.dayPeriod[rank];
-        if (day === eventDayNow) {
-            todayScore = (detail.scorePerNormalDay * eventDayNow) - todayBeginScore + detail.dayScores[0];
-            //todayScore = detail.todayScore;
-        }
         if (day === days) {
             todayScore = detail.lastDayScore;
             todayModel = predictModel.lastDayPeriod[rank];
+        } else if (day === eventDayNow) {
+            todayScore = detail.todayScore;
+        } else {
+            let daysRemain = days - day;
+            todayScore = (detail.scorePerNormalDay * (days - 1)) - todayBeginScore + detail.dayScores[0];
+            console.log(`${todayScore} / ${daysRemain}`);
+            todayScore /= daysRemain;
         }
+        console.log(todayScore);
 
         todayModel.forEach((it, i) => {
             //if (day === eventDayNow)console.log(`${it} ${todayScore} ${todayBeginScore}`)
@@ -78,23 +82,35 @@ function getOption(
     let len = predictDetail.ranks[rank].scores.length;
     let tss = genTimestamps(event.startAt, len);
     let pre = genPredict(predictDetail, predictModel, rank, len);
-    console.log(pre);
+    //console.log(pre);
     return {
         xAxis: {
             type: 'category',
             data: tss,
+            axisLabel:{
+                textStyle:{
+                    fontSize:'30px'
+                }
+            }
         },
         yAxis: {
             type: 'value',
+            axisLabel:{
+                textStyle:{
+                    fontSize:'30px'
+                }
+            }
         },
         series: [
             {
+                name: '实际PT',
                 data: genDataY(predictDetail.ranks[rank].scores),
                 type: 'line',
                 smooth: true,
                 showSymbol: false,
             },
             {
+                name: '预测PT',
                 data: pre,
                 type: 'line',
                 smooth: true,
@@ -105,6 +121,40 @@ function getOption(
             trigger: 'axis',
         },
     };
+}
+
+function getPredictElement(
+    event: EventInfo,
+    predictDetail: PredictDebug,
+    predictModel: PredictModel,
+    rank: string) {
+    let pre = predictDetail.ranks[rank];
+    return (
+        <div className={style.predict_detail}>
+            <ReactECharts style={{height: '600px',marginLeft:'70px'}} option={getOption(event, predictDetail, predictModel, rank)}/>
+            <table>
+                <tr>
+                    <th>排名</th>
+                    <th>首日</th>
+                    <th>今日 (预测)</th>
+                    <th>平日 (预测)</th>
+                    <th>终日 (预测)</th>
+                    <th>最终 (预测)</th>
+                </tr>
+                <tr>
+                    <td><b>{rank}</b></td>
+                    <td>{pre.dayScores[0]}</td>
+                    <td>{pre.todayScore}</td>
+                    <td>{Math.round(pre.scorePerNormalDay)}</td>
+                    <td>{Math.round(pre.lastDayScore)}</td>
+                    <td>{pre.result}</td>
+                </tr>
+            </table>
+            <div className={style.footer} style={{marginBottom:'130px'}}>
+                <div>bilibili @xfl03 &nbsp;&nbsp;&nbsp; 活动预测仅供参考，请时刻关注档线变化</div>
+            </div>
+        </div>
+    );
 }
 
 export default function PredictScore(
@@ -119,10 +169,11 @@ export default function PredictScore(
     }) {
     return (
         <div className={style.body}>
-            <div>
-                <ReactECharts style={{height: '800px'}} option={getOption(event, predictDetail, predictModel, "100")}/>
-            </div>
+            {getPredictElement(event, predictDetail, predictModel, "1000")}
+            {getPredictElement(event, predictDetail, predictModel, "5000")}
+            {getPredictElement(event, predictDetail, predictModel, "10000")}
         </div>
+
     );
 }
 

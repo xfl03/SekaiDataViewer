@@ -1,0 +1,56 @@
+.body {
+    background-color: #282C34;
+    color: #BBBBBB;
+    padding: 3rem 1.3rem 4rem 3rem;
+    font-size: 2.3rem;
+}
+
+.event_info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.event_info > div {
+    width: 100%;
+}
+
+.event_info > div > img {
+    margin: 0 auto;
+}
+
+.predict_summary {
+    margin-top: 100px;
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+}
+
+.predict_summary > table, .predict_detail > table {
+    margin: 0 auto;
+}
+
+.predict_summary td, .predict_summary th {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.predict_detail td, .predict_detail th {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.predict_detail {
+    text-align: center;
+    width: 100%;
+}
+

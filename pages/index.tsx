@@ -26,6 +26,9 @@ export default function Home() {
             <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
                 <a href={"/predictScore"}>PredictScore</a>
             </section>
+            <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+                <a href={"/topScore"}>TopScore</a>
+            </section>
         </Layout>
     )
 }

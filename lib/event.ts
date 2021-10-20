@@ -5,6 +5,7 @@ export interface Card {
     characterId: number;
     supportUnit: string;//none for default
     rarity: number;
+    cardRarityType: string;
     attr: string;
     skillId: number;
     prefix: string;
@@ -21,6 +22,7 @@ export interface EventInfo {
     characterBonus: number[];
     cards: Card[];
     bonusCards: Card[][];
+    ultraBonusCards: Card[];
 }
 
 export function getEvent(): EventInfo {

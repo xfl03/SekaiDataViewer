@@ -47,7 +47,7 @@ function getRarity(rarity: number) {
 
 function getCardRate(cardRate: CardRate, items: number) {
     let cards = cardRate.cards;
-    if (cards.length > 10) cards = cards.reverse();
+    cards = cards.reverse();
     return (
         <div style={{marginTop: '20px', marginLeft: '40px'}}>
             <div>{cardRate.p}%</div>
@@ -74,7 +74,7 @@ function getRate(gacha: GachaInfo, rarity: number) {
                 <div style={{fontSize: '50px', marginLeft: '20px'}}>{rate}%</div>
             </div>
             <div>
-                {cardRate.map(it => getCardRate(it, cardRate.length == 1 ? 20 : 10))}
+                {cardRate.map(it => getCardRate(it, cardRate.length == 1 ? 21 : 10))}
             </div>
         </div>
     );
