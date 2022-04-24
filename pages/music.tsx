@@ -17,6 +17,7 @@ export const vocals: Record<string, string> = {
     "sekai": "SEKAI",
     "another_vocal": "其他",
     "virtual_singer": "V家",
+    "april_fool_2022": "2022愚人节",
 }
 
 export const categories: Record<string, string> = {

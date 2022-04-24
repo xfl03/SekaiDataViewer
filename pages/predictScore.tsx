@@ -29,7 +29,7 @@ function genPredict(
     let days = predictDetail.days;
     let startPos = 18 + (predictDetail.eventDayNow - 1) * 48;
     let detail = predictDetail.ranks[rank];
-    let todayBeginScore = detail.dayScores[detail.dayScores.length - 1];
+    let todayBeginScore = detail.dayScores[detail.lastDayEnd - 1];
 
     console.log(`${eventDayNow}/${days}`);
 
@@ -135,7 +135,7 @@ function getPredictElement(
             <table>
                 <tr>
                     <th>排名</th>
-                    <th>首日</th>
+                    {pre.dayScores[0]?<th>首日</th>:<p></p>}
                     <th>今日 (预测)</th>
                     <th>平日 (预测)</th>
                     <th>终日 (预测)</th>
@@ -143,7 +143,7 @@ function getPredictElement(
                 </tr>
                 <tr>
                     <td><b>{rank}</b></td>
-                    <td>{pre.dayScores[0]}</td>
+                    {pre.dayScores[0]?<td>{pre.dayScores[0]}</td>:<p></p>}
                     <td>{pre.todayScore}</td>
                     <td>{Math.round(pre.scorePerNormalDay)}</td>
                     <td>{Math.round(pre.lastDayScore)}</td>

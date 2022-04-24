@@ -68,13 +68,14 @@ function getRate(gacha: GachaInfo, rarity: number) {
     if (rate === 0 || cardRate.length === 0) return (<div/>);
 
     return (
-        <div style={{marginTop: '60px', paddingBottom: '30px', height: '570px'}}>
+        <div style={{marginTop: '60px', paddingBottom: '30px'}}>
             <div style={{display: "flex"}}>
                 {getRarity(rarity)}
                 <div style={{fontSize: '50px', marginLeft: '20px'}}>{rate}%</div>
             </div>
             <div>
                 {cardRate.map(it => getCardRate(it, cardRate.length == 1 ? 21 : 10))}
+                {/*{cardRate.map(it => getCardRate(it, it.cards.length))}*/}
             </div>
         </div>
     );

@@ -41,12 +41,13 @@ export default function Event({event}: { event: EventInfo }) {
             </div>
 
             {/*Card info*/}
-            <div className={style.card} style={{maxHeight:event.cards.length>6?'750px':'600px'}}>
+            {/*<div className={style.card} style={{maxHeight:event.cards.length>6?'750px':'600px'}}>*/}
+            <div className={style.card}>
                 {event.cards.map(it => (
                     <div key={it.characterId} className={style.card_detail}>
                         {getCardImage(it, true)}
                         {getCardImage(it, false)}
-                        <div style={{marginLeft: '1.5rem'}}>
+                        <div style={{marginLeft: '1rem'}}>
                             <div style={{fontSize: '1.6rem', color: 'white'}}>
                                 {it.prefix}
                             </div>

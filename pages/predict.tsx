@@ -24,7 +24,7 @@ function getPredictTable(predictDetail: PredictDebug) {
             <td><b>{pre}</b></td>
             <td>{prep.result}</td>
             <td>{Math.round(prep.result * 1.03)}</td>
-            <td style={{paddingLeft:'120px'}}><b>{p}</b></td>
+            <td style={{paddingLeft:'60px'}}><b>{p}</b></td>
             <td>{pp.result}</td>
             <td>{Math.round(pp.result * 1.03)}</td>
         </tr>);
@@ -58,7 +58,7 @@ export default function Predict(
                         <th>排名</th>
                         <th>预测</th>
                         <th>预测+3%</th>
-                        <th style={{paddingLeft:'120px'}}>排名</th>
+                        <th style={{paddingLeft:'60px'}}>排名</th>
                         <th>预测</th>
                         <th>预测+3%</th>
                     </tr>
@@ -67,6 +67,9 @@ export default function Predict(
             </div>
             <div className={style.footer}>
                 <div>bilibili @xfl03</div>
+                <div
+                    style={{fontSize: '39px'}}>预测生成时间：{timeStampToString(predictDetail.predictTime, true)} {timeStampToString(predictDetail.predictTime, false)}
+                </div>
                 <div>活动预测仅供参考，请时刻关注档线变化</div>
             </div>
         </div>

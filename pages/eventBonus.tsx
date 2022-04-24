@@ -41,7 +41,7 @@ export default function EventBonus({event}: { event: EventInfo }) {
             </div>
 
             <div>
-                <div>+70%~80%</div>
+                <div>+70%~85%</div>
                 <div className={style.card} style={{marginLeft:'40px'}}>
                     {event.ultraBonusCards.map(it => {
                         return (getCardImage(it, false, true))
@@ -51,7 +51,7 @@ export default function EventBonus({event}: { event: EventInfo }) {
 
             {/*Bonus Card info*/}
             <div>
-                <div>+50%~60%</div>
+                <div>+50%~65%</div>
                 <div className={style.card}>
                     {event.characterBonus.map((it, p) => (
                         <div key={it} className={style.card_detail}>

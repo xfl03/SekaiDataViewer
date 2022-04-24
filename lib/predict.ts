@@ -8,6 +8,8 @@ export interface PredictDebugRank {
     todayScore: number,
     lastDayScore: number,
     result: number,
+    firstUsefulDay:number,
+    lastDayEnd:number,
 }
 
 export interface PredictDebug {
@@ -16,6 +18,7 @@ export interface PredictDebug {
     eventDayNow: number,
     eventStartTime: number,
     ranks: Record<string, PredictDebugRank>,
+    predictTime:number,
 }
 
 export interface PredictModel {
