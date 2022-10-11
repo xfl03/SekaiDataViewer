@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import {Card} from "./event";
 
 export interface GachaInfo {
     name: string;
@@ -8,16 +9,16 @@ export interface GachaInfo {
     endAt: number;
     rates: number[];
     cardRates: CardRate[][];
-}
-
-export interface Card {
-    rarity: number;
-    attr: string;
-    assetbundleName: string;
+    selectCards: SelectCard[];
 }
 
 export interface CardRate {
     p: string;
+    cards: Card[];
+}
+
+export interface SelectCard {
+    type:string;
     cards: Card[];
 }
 

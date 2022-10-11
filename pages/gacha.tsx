@@ -4,40 +4,30 @@ import style from "../styles/event.module.css"
 import dateFormat from "dateFormat";
 import {characters, units} from "../lib/character";
 import {chineseSkills} from "../lib/skill";
-import {Card, CardRate, GachaInfo, getGacha} from "../lib/gacha";
+import {CardRate, GachaInfo, getGacha, SelectCard} from "../lib/gacha";
+import {getCardImage} from "../lib/imageUtils";
+import {Card} from "../lib/event";
+
+const selectTypes = {
+    "normal": "常驻卡，可选0.4%",
+    "limited": "FES限定卡，可选0.4%",
+    "fixed": "固定0.4%",
+}
 
 function timeStampToString(timestamp: number): string {
     let date = new Date(timestamp);
     return dateFormat(date, "yyyy/mm/dd HH:MM");
 }
 
-function getImage(it: Card) {
-    let normal = it.rarity < 3;
-    return (
-        <div className={style.card_detail_image}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156">
-                <image href={`/assets/card/${it.assetbundleName}_${normal ? "normal" : "after_training"}.webp`} x="8"
-                       y="8" height="140" width="140"/>
-                <image href={`/assets/frame/cardFrame_S_${it.rarity}.png`} x="0" y="0" height="156"
-                       width="156"/>
-                <image href={`/assets/icon_attribute_${it.attr}.png`} x="0" y="0" height="35"
-                       width="35"/>
-                {Array.from(Array(it.rarity).keys()).map(i => (
-                    <image key={i} href={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
-                           x={8 + i * 22}
-                           y="125" width="22"
-                           height="22"/>
-                ))}
-            </svg>
-        </div>
-    );
-}
-
-function getRarity(rarity: number) {
-    let normal = rarity < 4;
+function getRarity(cardRarityType: string) {
+    if (cardRarityType === "rarity_birthday") {
+        return (<img src={`/assets/rarity_birthday.png`}
+                     style={{display: "inline"}}/>);
+    }
+    let normal = cardRarityType === "rarity_2";
     return (
         <div>
-            {Array.from(Array(rarity).keys()).map(i => (
+            {Array.from(Array(parseInt(cardRarityType.split("_")[1])).keys()).map(i => (
                 <img key={i} src={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
                      style={{display: "inline"}}/>
             ))}
@@ -45,19 +35,35 @@ function getRarity(rarity: number) {
     );
 }
 
+function getCards(cards: Card[], items: number) {
+    cards = cards.reverse();
+    return (
+        <div style={{display: "flex", flexWrap: "wrap"}}>
+            {cards.map((it, i) => {
+                if (i < items) return getCardImage(it, false, true)
+                else if (i == items) return (<div>等{cards.length}张</div>)
+                else return (<div/>)
+            })}
+        </div>
+    );
+}
+
 function getCardRate(cardRate: CardRate, items: number) {
     let cards = cardRate.cards;
-    cards = cards.reverse();
     return (
         <div style={{marginTop: '20px', marginLeft: '40px'}}>
             <div>{cardRate.p}%</div>
-            <div style={{display: "flex",flexWrap:"wrap"}}>
-                {cards.map((it, i) => {
-                    if (i < items) return getImage(it)
-                    else if (i == items) return (<div>等{cards.length}张</div>)
-                    else return (<div/>)
-                })}
-            </div>
+            {getCards(cards, items)}
+        </div>
+    );
+}
+
+function getCardSelect(select: SelectCard, items: number) {
+    let cards = select.cards;
+    return (
+        <div style={{marginTop: '20px', marginLeft: '40px'}}>
+            <div>{selectTypes[select.type]}</div>
+            {getCards(cards, items)}
         </div>
     );
 }
@@ -67,14 +73,17 @@ function getRate(gacha: GachaInfo, rarity: number) {
     let cardRate = gacha.cardRates[rarity - 1];
     if (rate === 0 || cardRate.length === 0) return (<div/>);
 
+    //特判2周年自选UP
+    let selectFlag = (rarity === 4 && gacha.selectCards !== undefined && gacha.selectCards.length !== 0);
     return (
         <div style={{marginTop: '60px', paddingBottom: '30px'}}>
             <div style={{display: "flex"}}>
-                {getRarity(rarity)}
+                {getRarity(cardRate[0].cards[0].cardRarityType)}
                 <div style={{fontSize: '50px', marginLeft: '20px'}}>{rate}%</div>
             </div>
             <div>
-                {cardRate.map(it => getCardRate(it, cardRate.length == 1 ? 21 : 10))}
+                {selectFlag && gacha.selectCards.map(it => getCardSelect(it, 9))}
+                {cardRate.map(it => getCardRate(it, cardRate.length == 1 ? 29 : 9))}
                 {/*{cardRate.map(it => getCardRate(it, it.cards.length))}*/}
             </div>
         </div>
@@ -101,7 +110,7 @@ export default function Gacha({gacha}: { gacha: GachaInfo }) {
                             if (gacha.rates[3 - it] === 0) return (<div/>);
                             return (
                                 <div style={{display: "flex"}}>
-                                    {getRarity(4 - it)}
+                                    {getRarity(gacha.cardRates[3 - it][0].cards[0].cardRarityType)}
                                     <div style={{
                                         fontSize: '50px',
                                         marginLeft: '20px',
@@ -117,6 +126,8 @@ export default function Gacha({gacha}: { gacha: GachaInfo }) {
 
             {/*Array.from(Array(4).keys()).map(it=>getRate(gacha,4-it))*/}
             {getRate(gacha, 4)}
+            {/*{getRate(gacha, 3)}*/}
+            {/*{getRate(gacha, 2)}*/}
 
             <div className={style.footer}>
                 仅供参考，请以游戏内信息为准<br/>

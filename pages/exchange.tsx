@@ -4,7 +4,8 @@ import style from "../styles/event.module.css"
 import dateFormat from "dateFormat";
 import {characters, units} from "../lib/character";
 import {chineseSkills} from "../lib/skill";
-import {Card, CardRate, ExchangeInfo, GachaInfo, getExchange, getGacha} from "../lib/gacha";
+import { CardRate, ExchangeInfo, GachaInfo, getExchange, getGacha} from "../lib/gacha";
+import {Card} from "../lib/event";
 
 function timeStampToString(timestamp: number): string {
     if (timestamp === undefined) return "";
@@ -13,7 +14,7 @@ function timeStampToString(timestamp: number): string {
 }
 
 function getImage(it: Card) {
-    let normal = it.rarity < 3;
+    let normal = it.rarity <3;
     return (
         <div className={style.card_detail_image}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156">
@@ -64,7 +65,7 @@ export default function Exchange({exchange}: { exchange: ExchangeInfo }) {
                 </div>
             </div>
 
-            {getAllCards(exchange.cards,43)}
+            {getAllCards(exchange.cards,49)}
 
             <div className={style.footer}>
                 仅供参考，请以游戏内信息为准<br/>

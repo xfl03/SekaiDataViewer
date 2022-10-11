@@ -23,3 +23,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/.idea
+/git-backup
+/data
+/public/assets/card
+/public/assets/card_icons
+/public/assets/event
+/public/assets/gacha
+/public/assets/music
