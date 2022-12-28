@@ -1,5 +1,5 @@
 import {GetStaticProps} from "next";
-import {Difficulty, getMusic, MusicInfo} from "../lib/music";
+import {getMusic, MusicInfo} from "../lib/music";
 import style from '../styles/music.module.css';
 import React from "react";
 import dateFormat from "dateFormat";
@@ -48,9 +48,9 @@ function timeStampToString(timestamp: number): string {
 function getCharacter(id: number, type: string) {
     if (type == "game_character") {
         return (<div><img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
-                     style={{width: '70px', height: '70px'}}/></div>);
+                          style={{width: '70px', height: '70px'}}/></div>);
     }
-    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id]}</div>)
+    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id] + "&nbsp;"}</div>)
 }
 
 export default function Music({music}: { music: MusicInfo }) {
@@ -66,11 +66,12 @@ export default function Music({music}: { music: MusicInfo }) {
                     </div>
                 </div>
                 <div className={style.music_info}>
-                    <div className={music.title.length > 10 ? style.music_info_name_small : style.music_info_name}>
+                    <div
+                        className={music.title.length >= 13 ? style.music_info_name_13 : (music.title.length > 10 ? style.music_info_name_small : style.music_info_name)}>
                         {music.title}
                     </div>
-                    <div className={style.music_info_author}>
-                        {(music.lyricist == music.composer && music.composer == music.arranger) ? `作词、作曲、编曲：${music.lyricist}` : `作词：${music.lyricist}  作曲：${music.composer}  编曲：${music.arranger}`}
+                    <div className={style.music_info_author} style={{maxWidth: "780px", whiteSpace: "pre-line"}}>
+                        {(music.lyricist == music.composer && music.composer == music.arranger) ? `编曲、作曲、作词：${music.lyricist}` : `编曲：${music.arranger} ${(music.arranger + music.composer).length > 15 ? '\n' : ''} 作曲：${music.composer} ${(music.arranger + music.composer + music.lyricist).length > 15 ? '\n' : ''} 作词：${music.lyricist}`}
                     </div>
                     <div className={style.music_info_duration}>
                         时长：{music.duration} 秒（{Math.floor(music.duration / 60)}分{Math.round((music.duration - Math.floor(music.duration / 60) * 60) * 10) / 10}秒）

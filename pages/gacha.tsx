@@ -2,8 +2,6 @@ import React from "react";
 import {GetStaticProps} from "next";
 import style from "../styles/event.module.css"
 import dateFormat from "dateFormat";
-import {characters, units} from "../lib/character";
-import {chineseSkills} from "../lib/skill";
 import {CardRate, GachaInfo, getGacha, SelectCard} from "../lib/gacha";
 import {getCardImage} from "../lib/imageUtils";
 import {Card} from "../lib/event";
@@ -21,14 +19,14 @@ function timeStampToString(timestamp: number): string {
 
 function getRarity(cardRarityType: string) {
     if (cardRarityType === "rarity_birthday") {
-        return (<img src={`/assets/rarity_birthday.png`}
+        return (<img alt = "birthday" src={`/assets/rarity_birthday.png`}
                      style={{display: "inline"}}/>);
     }
     let normal = cardRarityType === "rarity_2";
     return (
         <div>
             {Array.from(Array(parseInt(cardRarityType.split("_")[1])).keys()).map(i => (
-                <img key={i} src={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
+                <img alt = "star" key={i} src={`/assets/rarity_star_${normal ? "normal" : "afterTraining"}.png`}
                      style={{display: "inline"}}/>
             ))}
         </div>
@@ -99,7 +97,7 @@ export default function Gacha({gacha}: { gacha: GachaInfo }) {
                     <img src={`/assets/gacha/${gacha.assetbundleName}.webp`} alt={"logo"}/>
                 </div>
                 <div className={style.event_info}>
-                    <div className={style.event_info_name}>
+                    <div className={gacha.name.length > 15 ? style.gacha_info_name_15 : style.event_info_name}>
                         {gacha.name}
                     </div>
                     <div>
@@ -126,8 +124,8 @@ export default function Gacha({gacha}: { gacha: GachaInfo }) {
 
             {/*Array.from(Array(4).keys()).map(it=>getRate(gacha,4-it))*/}
             {getRate(gacha, 4)}
-            {/*{getRate(gacha, 3)}*/}
-            {/*{getRate(gacha, 2)}*/}
+            {gacha.cardRates[3][0].cards[0].cardRarityType === "rarity_birthday" && getRate(gacha, 3)}
+            {gacha.cardRates[3][0].cards[0].cardRarityType === "rarity_birthday" && getRate(gacha, 2)}
 
             <div className={style.footer}>
                 仅供参考，请以游戏内信息为准<br/>

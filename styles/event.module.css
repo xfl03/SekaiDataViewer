@@ -3,6 +3,7 @@
     color: #BBBBBB;
     padding: 2.6rem 1.3rem 2.6rem 3rem;
     font-size: 2.3rem;
+    min-height: 1022px;
 }
 
 .event {
@@ -22,6 +23,11 @@
 .event_info_name {
     color: #FFFFFF;
     font-size: 3.3rem;
+}
+
+.gacha_info_name_15 {
+    color: #FFFFFF;
+    font-size: 3rem;
 }
 
 .event_info_bonus {
@@ -47,7 +53,7 @@
 .card_detail {
     display: flex;
     padding: 0.6rem 0 0 2rem;
-    width: 48rem;
+    min-width: 48rem;
     min-height: 166px;
 }
 

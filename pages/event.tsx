@@ -1,10 +1,10 @@
 import React from "react";
 import {GetStaticProps} from "next";
-import {getEvent, EventInfo, Card} from "../lib/event";
+import {getEvent, EventInfo} from "../lib/event";
 import style from "../styles/event.module.css"
 import dateFormat from "dateFormat";
 import {characters, units} from "../lib/character";
-import {chineseSkills} from "../lib/skill";
+import {chineseSkills, chineseSkillsSize} from "../lib/skill";
 import {getCardImage, getCharacterIconFile} from "../lib/imageUtils";
 
 function timeStampToString(timestamp: number): string {
@@ -54,7 +54,7 @@ export default function Event({event}: { event: EventInfo }) {
                             <div style={{fontSize: '1.2rem'}}>
                                 {it.gacha ? "卡池招募" : "活动兑换"} {characters[it.characterId]}{it.supportUnit==="none"?"":`（${units[it.supportUnit]}）`}
                             </div>
-                            <div style={{fontSize: '1.4rem', whiteSpace: 'pre-line'}}>
+                            <div style={{fontSize: chineseSkillsSize[it.skillId], whiteSpace: 'pre-line'}}>
                                 {chineseSkills[it.skillId]}
                             </div>
                         </div>
