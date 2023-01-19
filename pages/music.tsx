@@ -50,7 +50,7 @@ function getCharacter(id: number, type: string) {
         return (<div><img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
                           style={{width: '70px', height: '70px'}}/></div>);
     }
-    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id] + "&nbsp;"}</div>)
+    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id] + " "}</div>)
 }
 
 export default function Music({music}: { music: MusicInfo }) {
