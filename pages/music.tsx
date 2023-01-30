@@ -38,6 +38,9 @@ export const outsideCharacters: Record<number, string> = {
     8: "ミクダヨー",
     9: "可不",
     10: "神威がくぽ",
+    11: "星界",
+    12: "東北きりたん",
+    13: "ゲキヤク",
 }
 
 function timeStampToString(timestamp: number): string {
@@ -50,7 +53,7 @@ function getCharacter(id: number, type: string) {
         return (<div><img alt={id.toString()} src={`/assets/chara_icons/chr_ts_${id}.png`}
                           style={{width: '70px', height: '70px'}}/></div>);
     }
-    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id] + " "}</div>)
+    return (<div>{outsideCharacters[id] === undefined ? `${id}缺失信息` : outsideCharacters[id]}&nbsp;&nbsp;&nbsp;</div>)
 }
 
 export default function Music({music}: { music: MusicInfo }) {

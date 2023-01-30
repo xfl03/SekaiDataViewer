@@ -16,6 +16,7 @@
 }
 
 .music_info {
+    max-width: 800px;
     margin-left: 5rem;
     flex-grow: 0;
 }
