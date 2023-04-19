@@ -41,6 +41,8 @@ export const outsideCharacters: Record<number, string> = {
     11: "星界",
     12: "東北きりたん",
     13: "ゲキヤク",
+    14: "「All Music MIKUdemy」一同",
+    15: "結月ゆかり",
 }
 
 function timeStampToString(timestamp: number): string {
