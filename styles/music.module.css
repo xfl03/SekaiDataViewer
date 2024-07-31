@@ -11,7 +11,7 @@
 }
 
 .music_logo {
-    margin-left: 2rem;
+    margin-left: 0;
     flex-grow: 0;
     max-width: 50%;
 }
@@ -61,10 +61,12 @@
 
 .music_info_vocal_info {
     display: flex;
+    flex-flow: wrap;
 }
 
 .music_info_vocal_name {
     width:10rem;
+    /*flex-flow: nowrap;*/
 }
 
 .footer {

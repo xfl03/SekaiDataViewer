@@ -18,6 +18,7 @@ export const vocals: Record<string, string> = {
     "another_vocal": "其他",
     "virtual_singer": "V家",
     "april_fool_2022": "2022愚人节",
+    "instrumental": "纯音乐",
 }
 
 export const categories: Record<string, string> = {
@@ -43,6 +44,19 @@ export const outsideCharacters: Record<number, string> = {
     13: "ゲキヤク",
     14: "「All Music MIKUdemy」一同",
     15: "結月ゆかり",
+    16: "ずんだもん",
+    17: "足立レイ",
+    18: "裏命",
+    19: "花隈千冬",
+    20: "VY1",
+    21: "SOLARIA",
+    22: "琴葉茜",
+    23: "琴葉葵",
+    24: "重音テト",
+    25: "Leo/need",
+    27: "Vivid BAD SQUAD",
+    30: "バーチャル・シンガー",
+    31: "めろう",
 }
 
 function timeStampToString(timestamp: number): string {
@@ -102,7 +116,8 @@ export default function Music({music}: { music: MusicInfo }) {
                         {music.vocals.map(it => (
                             <div key={it.musicVocalType} className={style.music_info_vocal_info}>
                                 <div className={style.music_info_vocal_name}>
-                                    {vocals[it.musicVocalType]}：
+                                    {vocals[it.musicVocalType]}
+                                    {/*{it.characters.length > 0 && <p>：</p>}*/}
                                 </div>
                                 {it.characters.map(it => getCharacter(it.characterId, it.characterType))}
                             </div>

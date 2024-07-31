@@ -31,11 +31,15 @@ export default function Event({event}: { event: EventInfo }) {
                         {event.characterBonus.map(it => (
                             <img key={it} alt={it.toString()} src={`/assets/chara_icons/${getCharacterIconFile(it)}`}/>
                         ))}
-                        <div className={style.event_info_plus}>
-                            &nbsp;+&nbsp;
-                        </div>
-                        <img className={style.event_info_bonus_attr} alt={event.attrBonus}
-                             src={`/assets/icon_attribute_${event.attrBonus}.png`}/>
+                        {event.attrBonus &&
+                            <div className={style.event_info_plus}>
+                                &nbsp;+&nbsp;
+                            </div>}
+
+                        {event.attrBonus &&
+                            <img className={style.event_info_bonus_attr} alt={event.attrBonus}
+                                                 src={`/assets/icon_attribute_${event.attrBonus}.png`}/>
+                        }
                     </div>
                 </div>
             </div>
@@ -52,7 +56,7 @@ export default function Event({event}: { event: EventInfo }) {
                                 {it.prefix}
                             </div>
                             <div style={{fontSize: '1.2rem'}}>
-                                {it.gacha ? "卡池招募" : "活动兑换"} {characters[it.characterId]}{it.supportUnit==="none"?"":`（${units[it.supportUnit]}）`}
+                                {it.gacha ? "卡池招募" : "活动兑换"} {characters[it.characterId]}{it.supportUnit === "none" ? "" : `（${units[it.supportUnit]}）`}
                             </div>
                             <div style={{fontSize: chineseSkillsSize[it.skillId], whiteSpace: 'pre-line'}}>
                                 {chineseSkills[it.skillId]}
