@@ -57,6 +57,7 @@ export const outsideCharacters: Record<number, string> = {
     27: "Vivid BAD SQUAD",
     30: "バーチャル・シンガー",
     31: "めろう",
+    32: "Lily",
 }
 
 function timeStampToString(timestamp: number): string {
